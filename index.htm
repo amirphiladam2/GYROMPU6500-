@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gyroscope Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <div class="floating-particles"></div>
+    
+    <header class="header">
+        <h1>🚀 Gyroscope Dashboard</h1>
+        <div class="status-indicator">
+            <div class="status-dot" id="statusDot"></div>
+            <span id="statusText">Disconnected</span>
+        </div>
+    </header>
+
+    <div class="controls">
+        <div class="control-group">
+            <label for="websocketUrl">WebSocket URL</label>
+            <input type="text" id="websocketUrl" value="ws://localhost:8765" placeholder="ws://localhost:8765">
+        </div>
+        <div class="control-group">
+            <label for="portSelect">Serial Port</label>
+            <select id="portSelect">
+                <option value="">Select Port</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <label for="baudRate">Baud Rate</label>
+            <select id="baudRate">
+                <option value="9600">9600</option>
+                <option value="19200">19200</option>
+                <option value="38400">38400</option>
+                <option value="57600">57600</option>
+                <option value="115200">115200</option>
+            </select>
+        </div>
+        <div class="control-group">
+            <button id="connectBtn">Connect to Bridge</button>
+        </div>
+        <div class="control-group">
+            <button id="serialConnectBtn" disabled>Connect Serial</button>
+        </div>
+        <div class="control-group">
+            <button id="logBtn">Start Logging</button>
+        </div>
+        <div class="control-group">
+            <button id="clearBtn">Clear Data</button>
+        </div>
+        <div class="control-group">
+            <button id="demoBtn">Demo Mode</button>
+        </div>
+    </div>
+
+    <main class="main-content">
+        <div class="left-panel">
+            <div class="card">
+                <h3>🎯 Attitude Indicator</h3>
+                <div class="attitude-indicator">
+                    <div class="horizon" id="horizon"></div>
+                    <div class="aircraft-symbol">✈</div>
+                    <div class="attitude-text">
+                        <div>R: <span id="rollValue">0°</span> P: <span id="pitchValue">0°</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>🧊 3D Orientation Cube</h3>
+                <div class="cube-container">
+                    <canvas id="cubeCanvas"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>📊 Live Data</h3>
+                <div class="data-grid">
+                    <div class="data-item">
+                        <div class="data-label">Accel X</div>
+                        <div class="data-value" id="accelX">0.00</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Accel Y</div>
+                        <div class="data-value" id="accelY">0.00</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Accel Z</div>
+                        <div class="data-value" id="accelZ">0.00</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Gyro X</div>
+                        <div class="data-value" id="gyroX">0.00</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Gyro Y</div>
+                        <div class="data-value" id="gyroY">0.00</div>
+                    </div>
+                    <div class="data-item">
+                        <div class="data-label">Gyro Z</div>
+                        <div class="data-value" id="gyroZ">0.00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="right-panel">
+            <div class="card">
+                <h3>📈 Real-time Charts</h3>
+                <div class="chart-container">
+                    <canvas id="gyroChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="card">
+                <h3>📝 Data Logs</h3>
+                <div class="logs" id="dataLogs"></div>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</body>
+</html>
